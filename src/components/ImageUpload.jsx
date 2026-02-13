@@ -64,7 +64,7 @@ export default function ImageUpload() {
           : 'border-brand-border hover:border-brand-accent/50 hover:bg-brand-card-hover/50'
       )}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} aria-label="Upload reference image" />
       <div className="flex flex-col items-center gap-3">
         <div className="p-3 rounded-full bg-brand-card">
           {isDragActive ? (

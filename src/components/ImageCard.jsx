@@ -1,8 +1,10 @@
 import { Download, CheckCircle, XCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import CIValidationBadge from '@/components/CIValidationBadge'
 
 export default function ImageCard({ result }) {
   const {
+    segment_id,
     segment_name,
     image_base64,
     image_mime,
@@ -39,7 +41,7 @@ export default function ImageCard({ result }) {
         {imageUrl ? (
           <img
             src={imageUrl}
-            alt={`Creative for ${segment_name}`}
+            alt={`AI-generated creative for ${segment_name} segment`}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -71,19 +73,25 @@ export default function ImageCard({ result }) {
       </div>
 
       {/* Footer */}
-      <div className="p-3 flex items-center justify-between">
-        <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-brand-text truncate">
-            {segment_name}
-          </p>
+      <div className="p-3 space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium text-brand-text truncate">
+              {segment_name}
+            </p>
+          </div>
+          <div className="ml-2 shrink-0">
+            {isSuccess ? (
+              <CheckCircle className="w-4 h-4 text-brand-success" />
+            ) : isFailed ? (
+              <XCircle className="w-4 h-4 text-brand-danger" />
+            ) : null}
+          </div>
         </div>
-        <div className="ml-2 shrink-0">
-          {isSuccess ? (
-            <CheckCircle className="w-4 h-4 text-brand-success" />
-          ) : isFailed ? (
-            <XCircle className="w-4 h-4 text-brand-danger" />
-          ) : null}
-        </div>
+        {/* Brand CI Validation Score */}
+        {isSuccess && segment_id && (
+          <CIValidationBadge segmentId={segment_id} compact />
+        )}
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ const initialState = {
   brandCIName: null,
   selectedSegments: [],
   aspectRatio: 'auto',
-  editAreas: ['actor'],
+  editAreas: ['actor', 'background', 'text'],
   segments: [],
   segmentsLoading: true,
   isGenerating: false,
